@@ -9,12 +9,13 @@
 				<mat-form-field class="full-width" appearance="outline">
 					<mat-label>Email ID</mat-label>
 					<input matInput placeholder="Email ID" formControlName="email">
-					<mat-error *ngIf="loginForm.hasError('required')">Required Field</mat-error>
+					<mat-error *ngIf="loginForm.controls['email'].touched && loginForm.get('email').hasError('required')">Required Field</mat-error>
+					<mat-error *ngIf="loginForm.controls['email'].touched && loginForm.get('email').hasError('email')">Invalid Email ID</mat-error>
 				</mat-form-field>
 				<mat-form-field class="full-width" appearance="outline">
 					<mat-label>Password</mat-label>
 					<input matInput placeholder="Password" formControlName="password" [type]="'password'">
-					<mat-error *ngIf="loginForm.hasError('required')">Required Field</mat-error>
+					<mat-error *ngIf="loginForm.controls['password'].touched && loginForm.get('password').hasError('required')">Required Field</mat-error>
 				</mat-form-field>
 				<div class="text-center">
 					<button mat-raised-button color="primary" class="login-button">Login</button>
