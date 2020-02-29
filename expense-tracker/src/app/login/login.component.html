@@ -1,0 +1,25 @@
+<div class="container login-container">
+	<div class="card">
+		<div class="login-card-title">
+			<i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+			<div class="login-header">Login</div>
+		</div>
+		<div class="login-card-body">
+			<form [formGroup]="loginForm" (ngSubmit)="loginExistingUser(loginForm)">
+				<mat-form-field class="full-width" appearance="outline">
+					<mat-label>Email ID</mat-label>
+					<input matInput placeholder="Email ID" formControlName="email">
+					<mat-error *ngIf="loginForm.hasError('required')">Required Field</mat-error>
+				</mat-form-field>
+				<mat-form-field class="full-width" appearance="outline">
+					<mat-label>Password</mat-label>
+					<input matInput placeholder="Password" formControlName="password" [type]="'password'">
+					<mat-error *ngIf="loginForm.hasError('required')">Required Field</mat-error>
+				</mat-form-field>
+				<div class="text-center">
+					<button mat-raised-button color="primary" class="login-button">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
