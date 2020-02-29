@@ -13,13 +13,15 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ExpenseTrackerComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

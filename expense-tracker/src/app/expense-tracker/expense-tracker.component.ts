@@ -12,5 +12,4 @@ export class ExpenseTrackerComponent implements OnInit {
   ngOnInit() { }
 
   
-
 }
