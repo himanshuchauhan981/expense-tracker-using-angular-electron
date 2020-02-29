@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+
 import { LoginService } from '../service/login.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { LoginService } from '../service/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,9 +22,11 @@ export class LoginComponent implements OnInit {
   })
 
   loginExistingUser(loginForm){
-    this.loginService.loginExistingUser(loginForm)
+    this.loginService.loginExistingUser(loginForm.value)
     .subscribe((res)=>{
-      console.log(res)
+      if(res.json().status  === 200){
+        this.router.navigate(['home'])
+      }
     })
   }
 

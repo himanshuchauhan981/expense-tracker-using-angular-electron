@@ -1,0 +1,16 @@
+<mat-sidenav-container class="sidenav-container">
+	<mat-sidenav #sidenav mode="over">
+		<div class="sidenav-contents">
+			<p class="top-nav-heading">Expense Tracker</p>
+			<i class="fa fa-times cross-icon" (click)="sidenav.toggle()"></i>
+		</div>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<div class="top-nav">
+			<i class="fa fa-bars bar-icon" (click)="sidenav.toggle()"></i>
+			<p class="top-nav-heading">Expense Tracker</p>
+		</div>
+	</mat-sidenav-content>	
+</mat-sidenav-container>
+
+
