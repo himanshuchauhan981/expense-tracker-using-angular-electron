@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ExpenseComponent } from './expense-tracker/expense/expense.component';
+import { IncomeComponent } from './expense-tracker/income/income.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     ExpenseTrackerComponent,
     NavbarComponent,
-    DashboardComponent
+    DashboardComponent,
+    ExpenseComponent,
+    IncomeComponent
   ],
   imports: [
     BrowserModule,

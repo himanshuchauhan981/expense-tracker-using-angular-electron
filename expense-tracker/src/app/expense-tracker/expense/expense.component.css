@@ -1,0 +1,28 @@
+.card{
+    padding: 0px 25px;
+    border-radius: 10px;
+}
+
+.expense-heading{
+    margin-top: 12px;
+    margin-bottom: 0px;
+    font-family: 'Lato';
+    letter-spacing: 1px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.expense-contents p{
+    margin-left: 15px;
+    margin-bottom: 0px;
+    font-family: 'Lato';
+    font-size: 30px;
+}
+
+.money-icon{
+    font-size: 10.5vw;
+}
+
+.material-icons.md-24 { 
+    font-size: 136px;
+}
