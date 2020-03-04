@@ -7,25 +7,30 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button'
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatTabsModule } from '@angular/material/tabs'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatSelectModule } from '@angular/material/select'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpenseComponent } from './expense-tracker/expense/expense.component';
 import { IncomeComponent } from './expense-tracker/income/income.component';
+import { OptionsComponent } from './expense-tracker/options/options.component';
+import { MatNativeDateModule } from '@angular/material';
+import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/popup-expense-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ExpenseTrackerComponent,
-    NavbarComponent,
-    DashboardComponent,
     ExpenseComponent,
-    IncomeComponent
+    IncomeComponent,
+    OptionsComponent,
+    PopupExpenseBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +41,15 @@ import { IncomeComponent } from './expense-tracker/income/income.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PopupExpenseBoxComponent]
 })
 export class AppModule { }
