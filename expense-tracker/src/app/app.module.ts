@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
+import { StorageServiceModule } from 'angular-webstorage-service'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +22,7 @@ import { IncomeComponent } from './expense-tracker/income/income.component';
 import { OptionsComponent } from './expense-tracker/options/options.component';
 import { MatNativeDateModule } from '@angular/material';
 import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/popup-expense-box.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/po
     ExpenseComponent,
     IncomeComponent,
     OptionsComponent,
-    PopupExpenseBoxComponent
+    PopupExpenseBoxComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/po
     MatNativeDateModule,
     MatTabsModule,
     MatAutocompleteModule,
-    MatSelectModule
+    MatSelectModule,
+    StorageServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,31 @@
+<div class="container signup-container">
+    <div class="card">
+        <div class="signup-card-title">
+			<i class="fa fa-user-plus fa-4x" aria-hidden="true"></i>
+			<div class="signup-header">Sign Up</div>
+		</div>
+		<div class="signup-card-body">
+			<form [formGroup]="signupForm" (ngSubmit)="signupNewUser(signupForm)">
+				<mat-form-field class="full-width" appearance="outline">
+					<mat-label>Email ID</mat-label>
+					<input matInput placeholder="Email ID" formControlName="email">
+					<mat-error *ngIf="signupForm.controls['email'].touched && signupForm.get('email').hasError('required')">Required Field</mat-error>
+					<mat-error *ngIf="signupForm.controls['email'].touched && signupForm.get('email').hasError('email')">Invalid Email ID</mat-error>
+				</mat-form-field>
+				<mat-form-field class="full-width" appearance="outline">
+					<mat-label>Password</mat-label>
+					<input matInput placeholder="Password" formControlName="password" [type]="'password'">
+					<mat-error *ngIf="signupForm.controls['password'].touched && signupForm.get('password').hasError('required')">Required Field</mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+					<input matInput placeholder=" Confirm Password" formControlName="confPassword" [type]="'password'">
+					<mat-error *ngIf="signupForm.controls['confPassword'].touched && signupForm.get('confPassword').hasError('required')">Required Field</mat-error>
+                </mat-form-field>
+				<div class="text-center">
+					<button mat-raised-button color="primary" class="signup-button">Signup</button>
+				</div>
+			</form>
+		</div>
+    </div>
+</div>

@@ -22,9 +22,10 @@ app.use(session({
     cookie: {secure : true}
 }))
 
+require('../db').connection
 app.use('/api',route())
 
-const server = app.listen(process.env.PORT,process.env.HOST,(err)=>{
+app.listen(process.env.PORT,process.env.HOST,(err)=>{
     if(err) console.log(err)
     else console.log(`Running on ${process.env.HOST}:${process.env.PORT}`)
 })

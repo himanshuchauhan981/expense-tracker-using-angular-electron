@@ -1,0 +1,36 @@
+.signup-container {
+	padding: 100px 0px;
+}
+
+.card {
+	width: 500px;
+	margin: 0 auto;
+	padding: 25px 35px;
+	border-radius: 14px;
+}
+
+.signup-card-title {
+	margin: 0 auto;
+}
+
+.signup-header{
+	font-family: 'Lato';
+	font-size: 25px;
+	letter-spacing: 1px;
+}
+
+.full-width{
+	width: 100%;
+}
+
+.signup-card-body{
+	padding: 5px 0px 0px 0px;
+	width: 27vw;
+	margin: 0 auto;
+}
+
+.signup-button{
+	width: 98px!important;
+	height: 48px!important;
+	font-size: 20px;
+}

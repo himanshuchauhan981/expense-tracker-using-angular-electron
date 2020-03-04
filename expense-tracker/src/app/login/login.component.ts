@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 
-import { LoginService } from '../service/login.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { LoginService } from '../service/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,9 +22,10 @@ export class LoginComponent implements OnInit {
   })
 
   loginExistingUser(loginForm){
-    this.loginService.loginExistingUser(loginForm.value)
+    this.userService.loginExistingUser(loginForm.value)
     .subscribe((res)=>{
       if(res.json().status  === 200){
+        this.userService.storeUserID(res.json().usersId)
         this.router.navigate(['home'])
       }
     })
