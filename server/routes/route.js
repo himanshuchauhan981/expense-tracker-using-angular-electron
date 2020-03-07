@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { userController } = require('../controller')
+const { userController,expenseIncomeController } = require('../controller')
 
 module.exports = () =>{
     const router = express.Router()
@@ -8,6 +8,8 @@ module.exports = () =>{
     router.post('/login', userController.loginExistingUsers)
 
     router.post('/signup', userController.saveNewUsers)
+
+    router.get('/category', expenseIncomeController.getAllCategory)
 
     return router
 }

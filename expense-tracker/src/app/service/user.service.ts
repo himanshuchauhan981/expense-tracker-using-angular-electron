@@ -1,7 +1,8 @@
 import { Injectable,Inject } from '@angular/core';
-import { environment } from '../../environments/environment'
 import { Http } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class UserService {
 
   storeUserID  = (token) =>{
 		this.storage.set('userId',token)
-	}
+  }
+  
+  getUserID = () =>{
+    return this.storage.get('userId')
+  }
 }
 

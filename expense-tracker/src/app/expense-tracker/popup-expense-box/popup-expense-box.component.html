@@ -9,26 +9,28 @@
 </mat-tab-group>
 
 <ng-template #formTemplate let-link="link">
-	<div class="container">
-		<form [formGroup]="expenseForm">
+	<div class="container mt-4">
+		<form [formGroup]="expenseForm" (ngSubmit)="submit(expenseForm)">
 			<div class="row">
 				<div class="col-md-6">
 					<mat-form-field class="full-width">
 						<mat-label>Choose a date</mat-label>
-						<input matInput [matDatepicker]="picker">
+						<input matInput [matDatepicker]="picker" formControlName="Date">
 						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 						<mat-datepicker #picker></mat-datepicker>
+						<mat-error *ngIf="expenseForm.controls['Date'].touched && expenseForm.get('Date').hasError('required')">Required Field</mat-error>
 					</mat-form-field>
 				</div>
 				<div class="col-md-6">
 					<mat-form-field class="full-width">
 						<input matInput placeholder="Category" aria-label="Category" aria-label="Category"
-							[matAutocomplete]="auto" formControlName="category">
+							[matAutocomplete]="auto" formControlName="Category">
 						<mat-autocomplete #auto="matAutocomplete">
 							<mat-option *ngFor="let value of filteredCategory | async" [value]="value.type">
 								<span>{{ value.type }}</span>
 							</mat-option>
 						</mat-autocomplete>
+						<mat-error *ngIf="expenseForm.controls['Category'].touched && expenseForm.get('Category').hasError('required')">Required Field</mat-error>
 					</mat-form-field>
 				</div>
 			</div>
@@ -36,23 +38,26 @@
 				<div class="col-md-4">
 					<mat-form-field class="full-width align-right">
 						<mat-label>Amount</mat-label>
-						<input matInput type="number" placeholder="Amount" class="disappear-button">
+						<input matInput type="number" placeholder="Amount" class="disappear-button" formControlName="Amount">
 						<span matPrefix>$&nbsp;</span>
 						<span matSuffix>.00</span>
+						<mat-error *ngIf="expenseForm.controls['Amount'].touched && expenseForm.get('Amount').hasError('required')">Required Field</mat-error>
 					</mat-form-field>
 				</div>
 				<div class="col-md-4">
 					<mat-form-field class="full-width">
 						<mat-label>Payee</mat-label>
-						<input matInput placeholder="Payee">
+						<input matInput placeholder="Payee" formControlName="Payee">
+						<mat-error *ngIf="expenseForm.controls['Payee'].touched && expenseForm.get('Payee').hasError('required')">Required Field</mat-error>
 					</mat-form-field>
 				</div>
 				<div class="col-md-4">
 					<mat-form-field class="full-width">
 						<mat-label>Payment Method</mat-label>
-						<mat-select>
+						<mat-select formControlName="PaymentMethod">
 							<mat-option *ngFor="let method of paymentMethod" [value]="method">{{ method }}</mat-option>
 						</mat-select>
+						<mat-error *ngIf="expenseForm.controls['PaymentMethod'].touched && expenseForm.get('PaymentMethod').hasError('required')">Required Field</mat-error>
 					</mat-form-field>
 				</div>
 			</div>
@@ -60,13 +65,13 @@
 				<div class="col-md-12">
 					<mat-form-field class="full-width">
 						<mat-label>Notes(Optional)</mat-label>
-						<textarea matInput></textarea>
+						<textarea matInput formControlName="Notes"></textarea>
 					</mat-form-field>
 				</div>
 			</div>
 			<div class="row-buttons">
 				<button mat-raised-button color="primary" class="mr-2">Create</button>
-				<button mat-raised-button color="warn" (click)="closePopUp()">Cancel</button>
+				<button mat-raised-button color="warn" type="button" (click)="closePopUp()">Cancel</button>
 			</div>
 		</form>
 	</div>

@@ -1,5 +1,5 @@
 const { users } = require('../models')
-const bcrypt = require('bcryptjs')
+const bcryptjs = require('bcryptjs')
 
 checkHashedPassword = async(password,hashedPassword)=>{
     let status = bcryptjs.compareSync(password,hashedPassword)

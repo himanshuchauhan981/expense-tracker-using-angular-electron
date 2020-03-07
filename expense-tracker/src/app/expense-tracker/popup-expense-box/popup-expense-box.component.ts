@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { map,startWith } from 'rxjs/operators'
 import { MatTabChangeEvent } from '@angular/material'
 import { MatDialogRef } from '@angular/material/dialog'
 
-export interface Category{
-  type :string  
-}
+import { CategoryService } from '../../service/category.service'
+import { ExpenseIncomeService } from '../../service/expense-income.service'
+import { UserService } from '../../service/user.service'
+
+
 @Component({
   selector: 'popup-expense-box',
   templateUrl: './popup-expense-box.component.html',
@@ -15,40 +16,35 @@ export interface Category{
 })
 export class PopupExpenseBoxComponent implements OnInit {
 
-  filteredCategory : Observable<Category[]>
-
   tabHeading : string = 'Income'
 
-  expenseForm = new FormGroup({
-    category : new FormControl('')
-  })
+  filteredCategory : any
 
-  categories: Category[] = [
-    {
-      type : 'Movies'
-    },
-    {
-      type: 'Paytm'
-    }
-  ]
+  expenseForm = new FormGroup({
+    Date : new FormControl('',Validators.required),
+    Category : new FormControl('',Validators.required),
+    Amount : new FormControl('',Validators.required),
+    Notes :  new FormControl(''),
+    PaymentMethod : new FormControl('',Validators.required),
+    Payee : new FormControl('',Validators.required)
+  })
   
   paymentMethod = ['Cash','Credit','Debit']
 
-  constructor(private dialogRef : MatDialogRef<PopupExpenseBoxComponent>) { 
-    this.filteredCategory = this.expenseForm.get('category').valueChanges
+  constructor(
+    private dialogRef : MatDialogRef<PopupExpenseBoxComponent>,
+    private categoryService: CategoryService,
+    private expenseIncomeService: ExpenseIncomeService,
+    private userService: UserService
+  ) {
+    this.filteredCategory = this.expenseForm.get('Category').valueChanges
     .pipe(
       startWith(''),
-      map(type => type ? this._filterCategory(type) : this.categories.slice())
+      map(type => type ? this.categoryService.list(type) : this.categoryService.categories.slice())
     )
   }
 
-  ngOnInit() {
-  }
-
-  private _filterCategory(value: string): Category[]{
-    let filterValue = value.toLowerCase()
-    return this.categories.filter(category => category.type.toLowerCase().indexOf(filterValue) === 0)
-  }
+  ngOnInit() { }
 
   public selectedTab(tabChangeEvent: MatTabChangeEvent): void{
     if(tabChangeEvent['index'] === 1){
@@ -61,5 +57,13 @@ export class PopupExpenseBoxComponent implements OnInit {
 
   closePopUp(){
     this.dialogRef.close()
+  }
+
+  submit(expenseForm){
+    let userId = this.userService.getUserID
+    this.expenseIncomeService.post(expenseForm.value,userId)
+      .subscribe((res) =>{
+        console.log(res.json())
+      })
   }
 }
