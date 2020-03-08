@@ -11,5 +11,7 @@ module.exports = () =>{
 
     router.get('/category', expenseIncomeController.getAllCategory)
 
+    router.post('/category', expenseIncomeController.saveNewCategory)
+
     return router
 }

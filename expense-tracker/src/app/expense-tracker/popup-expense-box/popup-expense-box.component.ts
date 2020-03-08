@@ -4,9 +4,10 @@ import { map,startWith } from 'rxjs/operators'
 import { MatTabChangeEvent } from '@angular/material'
 import { MatDialogRef } from '@angular/material/dialog'
 
-import { CategoryService } from '../../service/category.service'
+import { CategoryService, Category } from '../../service/category.service'
 import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { UserService } from '../../service/user.service'
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class PopupExpenseBoxComponent implements OnInit {
 
   tabHeading : string = 'Income'
 
-  filteredCategory : any
+  filteredCategory : Observable<Category[]>
 
   expenseForm = new FormGroup({
     Date : new FormControl('',Validators.required),
@@ -36,23 +37,23 @@ export class PopupExpenseBoxComponent implements OnInit {
     private categoryService: CategoryService,
     private expenseIncomeService: ExpenseIncomeService,
     private userService: UserService
-  ) {
+  ) { }
+
+  ngOnInit(){
+    this.categoryService.get()
+    
     this.filteredCategory = this.expenseForm.get('Category').valueChanges
     .pipe(
       startWith(''),
-      map(type => type ? this.categoryService.list(type) : this.categoryService.categories.slice())
+      map(value => value.length >=1 ? this.categoryService.filterList(value,this.tabHeading): [])
     )
   }
 
-  ngOnInit() { }
-
   public selectedTab(tabChangeEvent: MatTabChangeEvent): void{
-    if(tabChangeEvent['index'] === 1){
-      this.tabHeading = 'Expense'
-    }
-    else{
-      this.tabHeading = 'Income'
-    }
+    if(tabChangeEvent['index'] === 1) this.tabHeading = 'Expense'
+    else this.tabHeading = 'Income'
+
+    this.expenseForm.reset()
   }
 
   closePopUp(){
@@ -65,5 +66,11 @@ export class PopupExpenseBoxComponent implements OnInit {
       .subscribe((res) =>{
         console.log(res.json())
       })
+  }
+
+  addNew(){
+    let newCategory = this.expenseForm.get('Category').value
+    this.categoryService.addNew(newCategory,this.tabHeading)
+    this.expenseForm.get('Category').setValue(newCategory)
   }
 }

@@ -9,6 +9,11 @@ let expenseIncomeController = {
     getAllCategory : async (req,res) =>{
         let response = await expenseIncomeHandler.getAllCategory(req,res)
         return response
+    },
+
+    saveNewCategory : async (req,res) =>{
+        let response = await expenseIncomeHandler.saveNewCategory(req,res)
+        return response
     }
 }
 
