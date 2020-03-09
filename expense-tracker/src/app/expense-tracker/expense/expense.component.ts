@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { ExpenseData } from '../../service/expense-income.service'
 
 @Component({
   selector: 'expense',
@@ -11,7 +13,19 @@ export class ExpenseComponent implements OnInit {
 
   expense : number  = 0
 
-  ngOnInit() {
+  @Input() expenseData : ExpenseData[]
+
+  ngOnInit() { }
+
+  ngOnChanges(){
+    if(this.expenseData != undefined){
+      this.expenseData = this.expenseData.filter(data => data.Type === 'Expense')
+      this.expense = this.sumOfAmount('Amount')
+    }
+  }
+
+  sumOfAmount(key:string){
+    return this.expenseData.reduce((a,b) => a+ (b[key] || 0), 0)
   }
 
 }

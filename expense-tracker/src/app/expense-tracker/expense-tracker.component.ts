@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 
-import { ExpenseIncomeService } from '../service/expense-income.service'
+import { ExpenseIncomeService,ExpenseData } from '../service/expense-income.service'
 
 @Component({
   selector: 'expense-tracker',
@@ -9,9 +9,17 @@ import { ExpenseIncomeService } from '../service/expense-income.service'
 })
 export class ExpenseTrackerComponent implements OnInit {
 
-  constructor(private expenseService: ExpenseIncomeService) { }
 
-  ngOnInit(){ }
+  constructor(private expenseService: ExpenseIncomeService ) {
 
+  }
   
+  userExpense : ExpenseData[]
+  
+  ngOnInit(){ 
+    this.expenseService.get().subscribe(res =>{
+      this.userExpense = res.json().data
+    })
+    
+  }  
 }

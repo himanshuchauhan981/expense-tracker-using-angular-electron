@@ -11,8 +11,9 @@ export class ExpenseIncomeService {
 
   baseUrl : string = environment.baseUrl
 
+  public _userExpense : ExpenseData[]
+
   constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService){
-    this.get()
   }
 
   post(expenseValues){
@@ -20,16 +21,19 @@ export class ExpenseIncomeService {
   }
 
   get(){
-    let userId = this.storage.get('userId')
+    let userId = this.storage.get('userId');
     
-    this.http.get(`${this.baseUrl}/api/expense`,{
+    return this.http.get(`${this.baseUrl}/api/expense`, {
       params : {
         userId : userId
       }
     })
-    .subscribe(res =>{
-      // console.log(res.json())
-    })
-    
-  }
+  } 
+}
+
+export interface ExpenseData {
+  _id: String,
+  Date : Date,
+  Category: string,
+  Type: string
 }
