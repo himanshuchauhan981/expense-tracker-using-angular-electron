@@ -13,5 +13,9 @@ module.exports = () =>{
 
     router.post('/category', expenseIncomeController.saveNewCategory)
 
+    router.post('/expense', expenseIncomeController.saveNewExpenseIncome)
+
+    router.get('/expense', expenseIncomeController.getUserExpense)
+
     return router
 }

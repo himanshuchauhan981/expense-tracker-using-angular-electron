@@ -3,22 +3,28 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const expense = new Schema({
-    date:{
+    Date:{
         type: Date,
     },
-    category:{
+    Category:{
         type: String,
     },
-    amount: {
+    Amount: {
         type: Number,
     },
     Payee: {
         type: String
     },
-    paymentMethod : {
+    PaymentMethod: {
         type: String
     },
-    notes: {
+    Notes: {
+        type: String
+    },
+    UserId: {
+        type: String
+    },
+    Type: {
         type: String
     }
 })
