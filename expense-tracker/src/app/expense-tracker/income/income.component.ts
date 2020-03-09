@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core'
+import { MatSort } from '@angular/material/sort'
+import { MatPaginator } from '@angular/material/paginator'
+import { MatTableDataSource } from '@angular/material'
 
 import { ExpenseData } from '../../service/expense-income.service'
 
@@ -9,17 +12,29 @@ import { ExpenseData } from '../../service/expense-income.service'
 })
 export class IncomeComponent implements OnInit {
 
-  constructor() { }
-
   income : number = 0
 
-  @Input() incomeData : ExpenseData[] 
+  @Input() incomeData : ExpenseData[]
 
-  ngOnInit() { }
+  @ViewChild(MatPaginator,{ static: true }) paginator: MatPaginator
+
+  @ViewChild(MatSort,{ static: true }) sort: MatSort
+
+  dataSource : MatTableDataSource<ExpenseData>
+  
+  displayedColumns : string[] = ['Date','Category','Amount','Edit']
+  
+  constructor(){ }
+
+  ngOnInit(){ }
 
   ngOnChanges(){
     if(this.incomeData != undefined){
       this.incomeData = this.incomeData.filter(data => data.Type === 'Income')
+      
+      this.dataSource = new MatTableDataSource(this.incomeData)
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort
       
       this.income = this.sumOfAmount('Amount')
     }
@@ -28,5 +43,4 @@ export class IncomeComponent implements OnInit {
   sumOfAmount(key){
     return this.incomeData.reduce((a,b) => a+ (b[key] || 0), 0)
   }
-  
 }

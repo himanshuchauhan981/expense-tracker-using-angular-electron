@@ -26,3 +26,11 @@
 .material-icons.md-24 { 
     font-size: 136px;
 }
+
+.fa-pencil-square-o{
+    cursor: pointer;
+}
+
+.card-padding{
+    padding: 15px !important;
+}

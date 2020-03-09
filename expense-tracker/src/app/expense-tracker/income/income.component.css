@@ -22,3 +22,11 @@
 .money-icon{
     font-size: 10.5vw;
 }
+
+.card-padding{
+    padding: 15px !important;
+}
+
+.fa-pencil-square-o{
+    cursor: pointer;
+}
