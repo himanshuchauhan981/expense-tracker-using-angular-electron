@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatSelectModule } from '@angular/material/select'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -50,7 +51,8 @@ import { SignupComponent } from './signup/signup.component';
     MatTabsModule,
     MatAutocompleteModule,
     MatSelectModule,
-    StorageServiceModule
+    StorageServiceModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

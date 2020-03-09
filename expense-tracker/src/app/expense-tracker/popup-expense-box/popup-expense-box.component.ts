@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { map,startWith } from 'rxjs/operators'
 import { MatTabChangeEvent } from '@angular/material'
 import { MatDialogRef } from '@angular/material/dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { CategoryService, Category } from '../../service/category.service'
 import { ExpenseIncomeService } from '../../service/expense-income.service'
@@ -36,7 +37,8 @@ export class PopupExpenseBoxComponent implements OnInit {
     private dialogRef : MatDialogRef<PopupExpenseBoxComponent>,
     private categoryService: CategoryService,
     private expenseIncomeService: ExpenseIncomeService,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(){
@@ -53,7 +55,11 @@ export class PopupExpenseBoxComponent implements OnInit {
     if(tabChangeEvent['index'] === 1) this.tabHeading = 'Expense'
     else this.tabHeading = 'Income'
 
-    this.expenseForm.reset()
+    this.expenseForm.markAsUntouched()
+    let controls = this.expenseForm.controls
+    for(let control in controls){
+      controls[control].setValue('')
+    }
   }
 
   closePopUp(){
@@ -61,10 +67,17 @@ export class PopupExpenseBoxComponent implements OnInit {
   }
 
   submit(expenseForm){
-    let userId = this.userService.getUserID
-    this.expenseIncomeService.post(expenseForm.value,userId)
+    let userId = this.userService.getUserID()
+
+    expenseForm.value.UserId = userId
+    expenseForm.value.Type = this.tabHeading
+
+    this.expenseIncomeService.post(expenseForm.value)
       .subscribe((res) =>{
-        console.log(res.json())
+        this.closePopUp()
+        this.snackBar.open(res.json().msg,'Close',{
+          duration : 5000
+        })
       })
   }
 

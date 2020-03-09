@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+
+import { ExpenseIncomeService } from '../service/expense-income.service'
 
 @Component({
   selector: 'expense-tracker',
@@ -7,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpenseTrackerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private expenseService: ExpenseIncomeService) { }
 
-  ngOnInit() { }
+  ngOnInit(){ }
 
   
 }

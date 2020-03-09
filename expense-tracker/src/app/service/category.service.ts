@@ -23,6 +23,7 @@ export class CategoryService {
 
 
   filterList(value : string,heading : string): Category[] {
+    console.log('filtering list ',value)
     let filterValue = value.toLowerCase()
     return this.categories.filter(data => data.category.toLowerCase().indexOf(filterValue) === 0 && data.type == heading)
   }
