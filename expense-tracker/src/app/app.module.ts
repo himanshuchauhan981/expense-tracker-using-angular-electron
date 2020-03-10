@@ -16,7 +16,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -62,12 +63,10 @@ import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-di
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
-  providers: [
-    // { provide: MatDialogRef },
-    // { provide: MAT_DIALOG_DATA, useValue: [] },
-  ],
+  providers: [ ],
   bootstrap: [AppComponent],
   entryComponents: [
     PopupExpenseBoxComponent,

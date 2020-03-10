@@ -6,3 +6,11 @@ button{
     float: right;
     outline: 0;
 }
+
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+  }
+  
+  .example-month-picker .mat-calendar-arrow {
+    display: none;
+  }
