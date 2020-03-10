@@ -2,8 +2,11 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material'
+import { MatDialog } from '@angular/material/dialog'
 
+import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { ExpenseData } from '../../service/expense-income.service'
+import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component'
 
 @Component({
   selector: 'income',
@@ -24,7 +27,7 @@ export class IncomeComponent implements OnInit {
   
   displayedColumns : string[] = ['Date','Category','Amount','Edit']
   
-  constructor(){ }
+  constructor(private expenseIncomeService: ExpenseIncomeService, private dialog: MatDialog){ }
 
   ngOnInit(){ }
 
@@ -42,5 +45,15 @@ export class IncomeComponent implements OnInit {
 
   sumOfAmount(key){
     return this.incomeData.reduce((a,b) => a+ (b[key] || 0), 0)
+  }
+
+  editIncome(id){
+    this.expenseIncomeService.getExpense(id)
+    .subscribe((res) =>{
+      this.dialog.open(PopupExpenseBoxComponent,{
+        width: '800px',
+        data: res.json().data
+      })
+    })
   }
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 import { MatPaginator } from '@angular/material/paginator'
-import { MatTableDataSource } from '@angular/material'
+import { MatTableDataSource, MatDialog } from '@angular/material'
 
-import { ExpenseData } from '../../service/expense-income.service'
+import { ExpenseData, ExpenseIncomeService } from '../../service/expense-income.service'
+import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component'
 
 @Component({
   selector: 'expense',
@@ -12,7 +13,7 @@ import { ExpenseData } from '../../service/expense-income.service'
 })
 export class ExpenseComponent implements OnInit {
 
-  constructor() { }
+  constructor(private expenseIncomeService: ExpenseIncomeService, private dialog: MatDialog) { }
 
   expense : number  = 0
 
@@ -42,6 +43,16 @@ export class ExpenseComponent implements OnInit {
 
   sumOfAmount(key:string){
     return this.expenseData.reduce((a,b) => a+ (b[key] || 0), 0)
+  }
+
+  editExpense(id){
+    this.expenseIncomeService.getExpense(id)
+    .subscribe((res) =>{
+      this.dialog.open(PopupExpenseBoxComponent,{
+        width: '800px',
+        data: res.json().data
+      })
+    })
   }
 
 }

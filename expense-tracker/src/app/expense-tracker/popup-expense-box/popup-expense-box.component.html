@@ -1,9 +1,9 @@
 <p class="tab-heading">Create new {{ tabHeading }}</p>
-<mat-tab-group (selectedTabChange)="selectedTab($event)" mat-stretch-tabs class="tabs-width mat-elevation-z4">
-	<mat-tab label="Income">
+<mat-tab-group [selectedIndex]="selectTab.value" (selectedTabChange)="selectedTab($event)" mat-stretch-tabs class="tabs-width mat-elevation-z4">
+	<mat-tab label="Income" [disabled]="disableIncomeTab">
 		<ng-container [ngTemplateOutlet]="formTemplate"></ng-container>
 	</mat-tab>
-	<mat-tab label="Expense">
+	<mat-tab label="Expense" [disabled]="disableExpenseTab">
 		<ng-container [ngTemplateOutlet]="formTemplate"></ng-container>
 	</mat-tab>
 </mat-tab-group>
@@ -15,7 +15,7 @@
 				<div class="col-md-6">
 					<mat-form-field class="full-width">
 						<mat-label>Choose a date</mat-label>
-						<input matInput [matDatepicker]="picker" formControlName="Date">
+						<input autocomplete="off" matInput [matDatepicker]="picker" formControlName="Date">
 						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 						<mat-datepicker #picker></mat-datepicker>
 						<mat-error

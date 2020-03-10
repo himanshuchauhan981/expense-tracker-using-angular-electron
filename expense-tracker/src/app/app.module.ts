@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -58,7 +59,8 @@ import { SignupComponent } from './signup/signup.component';
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

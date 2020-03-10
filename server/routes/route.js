@@ -17,5 +17,9 @@ module.exports = () =>{
 
     router.get('/expense', expenseIncomeController.getUserExpense)
 
+    router.get('/expense/:id', expenseIncomeController.getOneExpense)
+
+    router.put('/expense/:id', expenseIncomeController.updateExpense)
+
     return router
 }

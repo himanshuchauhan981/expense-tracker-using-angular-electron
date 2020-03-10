@@ -34,3 +34,10 @@
 .card-padding{
     padding: 15px !important;
 }
+
+.table-container {
+    margin-top: 10px;
+    min-height: 336px;
+    max-height: 400px;
+    overflow: auto;
+}

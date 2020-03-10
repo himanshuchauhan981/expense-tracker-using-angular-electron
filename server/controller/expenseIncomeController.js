@@ -19,6 +19,16 @@ let expenseIncomeController = {
     getUserExpense : async (req,res) =>{
         let response = await expenseIncomeHandler.getUserExpense(req,res)
         return response
+    },
+
+    getOneExpense : async (req,res) =>{
+        let response = await expenseIncomeHandler.getOneExpense(req,res)
+        return response
+    },
+
+    updateExpense : async (req,res) =>{
+        let response = await expenseIncomeHandler.updateExpense(req,res)
+        return response
     }
 }
 

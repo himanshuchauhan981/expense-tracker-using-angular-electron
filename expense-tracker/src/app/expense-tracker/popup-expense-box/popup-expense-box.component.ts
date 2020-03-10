@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { map,startWith } from 'rxjs/operators'
-import { MatTabChangeEvent } from '@angular/material'
-import { MatDialogRef } from '@angular/material/dialog'
+import { MatTabChangeEvent,MatTab } from '@angular/material'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { CategoryService, Category } from '../../service/category.service'
 import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { UserService } from '../../service/user.service'
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'popup-expense-box',
@@ -21,6 +20,12 @@ export class PopupExpenseBoxComponent implements OnInit {
   tabHeading : string = 'Income'
 
   filteredCategory : Observable<Category[]>
+
+  selectTab = new FormControl(0)
+
+  disableIncomeTab : boolean = false
+
+  disableExpenseTab : boolean = false
 
   expenseForm = new FormGroup({
     Date : new FormControl('',Validators.required),
@@ -38,7 +43,8 @@ export class PopupExpenseBoxComponent implements OnInit {
     private categoryService: CategoryService,
     private expenseIncomeService: ExpenseIncomeService,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data,
   ) { }
 
   ngOnInit(){
@@ -49,6 +55,10 @@ export class PopupExpenseBoxComponent implements OnInit {
       startWith(''),
       map(value => value.length >=1 ? this.categoryService.filterList(value,this.tabHeading): [])
     )
+
+    if(this.data != null){
+      this.fillValues()
+    }
   }
 
   public selectedTab(tabChangeEvent: MatTabChangeEvent): void{
@@ -72,13 +82,14 @@ export class PopupExpenseBoxComponent implements OnInit {
     expenseForm.value.UserId = userId
     expenseForm.value.Type = this.tabHeading
 
-    this.expenseIncomeService.post(expenseForm.value)
-      .subscribe((res) =>{
-        this.closePopUp()
-        this.snackBar.open(res.json().msg,'Close',{
-          duration : 5000
-        })
-      })
+    if(this.data != null){
+      this.expenseIncomeService.put(expenseForm.value,this.data['_id'])
+    }
+    else{
+      this.expenseIncomeService.post(expenseForm.value)
+    }
+    this.closePopUp()
+    this.expenseIncomeService.fireSubmitEvent()
   }
 
   addNew(){
@@ -86,4 +97,28 @@ export class PopupExpenseBoxComponent implements OnInit {
     this.categoryService.addNew(newCategory,this.tabHeading)
     this.expenseForm.get('Category').setValue(newCategory)
   }
+
+  fillValues(){
+    let expenseValues = Object.assign({}, this.data)
+    let expenseControls = this.expenseForm.controls
+
+    delete expenseValues['_id']
+
+    if(expenseValues.Type==='Income'){
+      this.selectTab.setValue(0)
+      this.disableExpenseTab = true
+    }
+    else{
+      this.selectTab.setValue(1)
+      this.disableIncomeTab = true
+    }
+
+    for(let key in expenseValues){
+      if(key != 'Type'){
+        expenseControls[key].setValue(expenseValues[key])
+      }
+    }
+  }
+
+ 
 }
