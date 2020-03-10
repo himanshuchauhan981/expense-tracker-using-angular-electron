@@ -29,6 +29,11 @@ let expenseIncomeController = {
     updateExpense : async (req,res) =>{
         let response = await expenseIncomeHandler.updateExpense(req,res)
         return response
+    },
+
+    deleteExpense : async (req,res) =>{
+        let response = await expenseIncomeHandler.deleteExpense(req,res)
+        return response
     }
 }
 

@@ -16,7 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -28,6 +28,7 @@ import { OptionsComponent } from './expense-tracker/options/options.component';
 import { MatNativeDateModule } from '@angular/material';
 import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/popup-expense-box.component';
 import { SignupComponent } from './signup/signup.component';
+import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SignupComponent } from './signup/signup.component';
     IncomeComponent,
     OptionsComponent,
     PopupExpenseBoxComponent,
-    SignupComponent
+    SignupComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,8 +64,14 @@ import { SignupComponent } from './signup/signup.component';
     MatSortModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    // { provide: MatDialogRef },
+    // { provide: MAT_DIALOG_DATA, useValue: [] },
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [PopupExpenseBoxComponent]
+  entryComponents: [
+    PopupExpenseBoxComponent,
+    DeleteDialogComponent
+  ]
 })
 export class AppModule { }

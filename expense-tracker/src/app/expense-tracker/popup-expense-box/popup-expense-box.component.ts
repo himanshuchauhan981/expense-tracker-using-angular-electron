@@ -1,14 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { map,startWith } from 'rxjs/operators'
-import { MatTabChangeEvent,MatDialog } from '@angular/material'
+import { MatTabChangeEvent } from '@angular/material'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
+import { Observable } from 'rxjs';
 
 import { CategoryService, Category } from '../../service/category.service'
 import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { UserService } from '../../service/user.service'
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'popup-expense-box',
@@ -92,7 +91,6 @@ export class PopupExpenseBoxComponent implements OnInit {
       this.expenseIncomeService.post(expenseForm.value)
     }
     this.closePopUp()
-    // this.expenseIncomeService.fireSubmitEvent()
   }
 
   addNew(){
@@ -121,7 +119,5 @@ export class PopupExpenseBoxComponent implements OnInit {
         expenseControls[key].setValue(expenseValues[key])
       }
     }
-  }
-
- 
+  } 
 }

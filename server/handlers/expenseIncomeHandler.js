@@ -9,6 +9,7 @@ let expenseIncomeHandler = {
 
         if(expenseData.Type === 'Income') expenseData['msg']="SAVE_INCOME"
         else expenseData['msg']="SAVE_EXPENSE"
+
         res.status(200).send({status: 200, msg: `New ${req.body.Type} created`, data: expenseData})
     },
 
@@ -39,8 +40,7 @@ let expenseIncomeHandler = {
             {$set:req.body},
             {new: true}
         )
-        
-        console.log(updatedExpense)
+
         updatedExpense = (({_id,Date,Category,Amount,Type}) => ({_id,Date,Category,Amount,Type}))(updatedExpense)
         
         if(updatedExpense.Type === 'Income'){
@@ -49,6 +49,11 @@ let expenseIncomeHandler = {
         else updatedExpense['msg'] = 'UPDATE_EXPENSE'
 
         res.status(200).json({status: 200, msg: 'Updated Successfully', data: updatedExpense})
+    },
+
+    deleteExpense : async (req,res) =>{
+        let deletedExpense = await expense.findByIdAndRemove(req.params.id)
+        res.status(200).json({status: 200, msg:'Deleted Successfully'})
     }
 }
 

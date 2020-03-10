@@ -27,7 +27,7 @@
     font-size: 136px;
 }
 
-.fa-pencil-square-o{
+.fa-pencil-square-o,.fa-remove{
     cursor: pointer;
 }
 

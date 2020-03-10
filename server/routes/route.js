@@ -21,5 +21,7 @@ module.exports = () =>{
 
     router.put('/expense/:id', expenseIncomeController.updateExpense)
 
+    router.delete('/expense/:id',expenseIncomeController.deleteExpense)
+
     return router
 }

@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+	<p>Are you sure want to delete ?</p>
+</div>
+<div mat-dialog-actions class="float-right">
+	<button mat-raised-button color="primary" (click)="expenseIncomeService.delete(id)">Yes</button>
+	<button mat-raised-button color="warn" (click)="closePopUp()">No</button>
+</div>

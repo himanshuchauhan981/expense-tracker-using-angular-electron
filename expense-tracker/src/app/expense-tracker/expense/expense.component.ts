@@ -5,6 +5,7 @@ import { MatTableDataSource, MatDialog } from '@angular/material'
 
 import { ExpenseData, ExpenseIncomeService } from '../../service/expense-income.service'
 import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component'
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
   selector: 'expense',
@@ -25,7 +26,7 @@ export class ExpenseComponent implements OnInit {
 
   dataSource : MatTableDataSource<ExpenseData>
   
-  displayedColumns : string[] = ['Date','Category','Amount','Edit']
+  displayedColumns : string[] = ['Date','Category','Amount','Edit','Remove']
 
   ngOnChanges(){
     if(this.expenseData != undefined){
@@ -49,6 +50,14 @@ export class ExpenseComponent implements OnInit {
           this.updateExpense(res)
         }
         this.expense = this.sumOfAmount('Amount')
+      }
+    })
+
+    this.expenseIncomeService.deleteChange.subscribe((id:any) =>{
+      if(id != ''){
+        this.dataSource.data = this.dataSource.data.filter((value,key) =>{
+          return value._id != id
+        })
       }
     })
   }
@@ -83,4 +92,10 @@ export class ExpenseComponent implements OnInit {
     })
   }
 
+  deleteExpense(id){
+    this.dialog.open(DeleteDialogComponent,{
+      width: '300px',
+      data: id
+    })
+  }
 }

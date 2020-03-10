@@ -1,10 +1,11 @@
-import { Injectable,Inject, Output, EventEmitter } from '@angular/core'
+import { Injectable,Inject } from '@angular/core'
 import { Http } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 
+
 import { environment } from '../../environments/environment'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { BehaviorSubject,Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class ExpenseIncomeService {
   tempdata : any
 
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([])
+
+  deleteChange: BehaviorSubject<string> = new BehaviorSubject<string>('')
 
   constructor(
     private http: Http,
@@ -53,6 +56,19 @@ export class ExpenseIncomeService {
     })
   }
 
+  delete(id){
+    this.http.delete(`${this.baseUrl}/api/expense/${id}`)
+    .subscribe(res =>{
+      let status = res.json().status
+      if(status === 200){
+        this.deleteChange.next(id)
+        this.snackBar.open(res.json().msg,'Close',{
+          duration : 5000
+        })
+      }
+    })
+  }
+
   getExpense(id:string){
     return this.http.get(`${this.baseUrl}/api/expense/${id}`)
   }
@@ -68,9 +84,4 @@ export interface ExpenseData {
   Category: string,
   Type: string,
   Amount: number
-}
-
-export interface submitSubject{
-  updatedExpense: any,
-  updatedMsg : string
 }
