@@ -26,6 +26,8 @@ export class PopupExpenseBoxComponent implements OnInit {
 
   disableExpenseTab : boolean = false
 
+  buttonName : string = 'Create'
+
   expenseForm = new FormGroup({
     Date : new FormControl('',Validators.required),
     Category : new FormControl('',Validators.required),
@@ -55,6 +57,7 @@ export class PopupExpenseBoxComponent implements OnInit {
     )
 
     if(this.data != null){
+      this.buttonName = 'Update'
       this.fillValues()
     }
 

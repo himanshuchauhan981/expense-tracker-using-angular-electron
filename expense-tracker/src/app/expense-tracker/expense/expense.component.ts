@@ -42,14 +42,16 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(){
     this.expenseIncomeService.dataChange.subscribe((res:any) =>{
-      if(res.length != 0 && res.Type == 'Expense'){
-        if(res.msg === 'SAVE_EXPENSE'){
-          this.addExpense(res)
+      if(res !== undefined){
+        if(res.length != 0 && res.Type == 'Expense'){
+          if(res.msg === 'SAVE_EXPENSE'){
+            this.addExpense(res)
+          }
+          else if(res.msg === 'UPDATE_EXPENSE'){
+            this.updateExpense(res)
+          }
+          this.expense = this.sumOfAmount('Amount')
         }
-        else if(res.msg === 'UPDATE_EXPENSE'){
-          this.updateExpense(res)
-        }
-        this.expense = this.sumOfAmount('Amount')
       }
     })
 

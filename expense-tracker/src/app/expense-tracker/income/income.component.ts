@@ -47,15 +47,18 @@ export class IncomeComponent implements OnInit {
 
   ngOnInit(){
     this.expenseIncomeService.dataChange.subscribe((res:any) =>{
-      if(res.length != 0 && res.Type == 'Income'){
-        if(res.msg === 'SAVE_INCOME'){
-          this.addIncome(res)
+      if(res !== undefined){
+        if(res.length != 0 && res.Type == 'Income'){
+          if(res.msg === 'SAVE_INCOME'){
+            this.addIncome(res)
+          }
+          else if(res.msg === 'UPDATE_INCOME'){
+            this.updateIncome(res)
+          }
+          this.income = this.sumOfAmount('Amount')
         }
-        else if(res.msg === 'UPDATE_INCOME'){
-          this.updateIncome(res)
-        }
-        this.income = this.sumOfAmount('Amount')
       }
+      
     })
 
     this.expenseIncomeService.deleteChange.subscribe((id:any) =>{
