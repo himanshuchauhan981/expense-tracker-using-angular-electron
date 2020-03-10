@@ -1,8 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material';
-import { Subject } from 'rxjs';
 
-import { PopupExpenseBoxComponent } from './popup-expense-box/popup-expense-box.component'
 import { ExpenseIncomeService,ExpenseData } from '../service/expense-income.service'
 
 
@@ -18,14 +16,8 @@ export class ExpenseTrackerComponent implements OnInit {
   
   userExpense : ExpenseData[]
   
-  ngOnInit(){ 
-    
+  ngOnInit(){
     this.getUserExpense()
-    this.expenseService.submitEvent.subscribe((res) =>{
-      if(res){
-        this.getUserExpense()
-      }
-    })
   }
   
   getUserExpense(){

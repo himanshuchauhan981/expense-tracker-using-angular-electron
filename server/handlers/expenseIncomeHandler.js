@@ -3,8 +3,13 @@ const { category,expense } = require('../models')
 let expenseIncomeHandler = {
     saveNewExpenseIncome : async (req,res) =>{
         let newExpense = new expense(req.body)
-        await newExpense.save()
-        res.status(200).send({status: 200, msg: `New ${req.body.Type} created`})
+        let expenseData = await newExpense.save()
+
+        expenseData = (({_id,Date,Category,Amount,Type}) => ({_id,Date,Category,Amount,Type}))(expenseData)
+
+        if(expenseData.Type === 'Income') expenseData['msg']="SAVE_INCOME"
+        else expenseData['msg']="SAVE_EXPENSE"
+        res.status(200).send({status: 200, msg: `New ${req.body.Type} created`, data: expenseData})
     },
 
     getAllCategory : async (req,res) =>{
@@ -29,8 +34,21 @@ let expenseIncomeHandler = {
     },
 
     updateExpense : async (req,res) =>{
-        let updatedExpense = await expense.findByIdAndUpdate(req.params.id,{$set:req.body})
-        res.status(200).json({status: 200, msg:'Updated Successfully'})
+        let updatedExpense = await expense.findByIdAndUpdate(
+            req.params.id,
+            {$set:req.body},
+            {new: true}
+        )
+        
+        console.log(updatedExpense)
+        updatedExpense = (({_id,Date,Category,Amount,Type}) => ({_id,Date,Category,Amount,Type}))(updatedExpense)
+        
+        if(updatedExpense.Type === 'Income'){
+            updatedExpense['msg'] = 'UPDATE_INCOME'
+        }
+        else updatedExpense['msg'] = 'UPDATE_EXPENSE'
+
+        res.status(200).json({status: 200, msg: 'Updated Successfully', data: updatedExpense})
     }
 }
 

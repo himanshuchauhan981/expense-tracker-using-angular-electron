@@ -27,8 +27,6 @@ export class ExpenseComponent implements OnInit {
   
   displayedColumns : string[] = ['Date','Category','Amount','Edit']
 
-  ngOnInit() { }
-
   ngOnChanges(){
     if(this.expenseData != undefined){
       this.expenseData = this.expenseData.filter(data => data.Type === 'Expense')
@@ -39,6 +37,20 @@ export class ExpenseComponent implements OnInit {
 
       this.expense = this.sumOfAmount('Amount')
     }
+  }
+
+  ngOnInit(){
+    this.expenseIncomeService.dataChange.subscribe((res:any) =>{
+      if(res.length != 0 && res.Type == 'Expense'){
+        if(res.msg === 'SAVE_EXPENSE'){
+          this.addExpense(res)
+        }
+        else if(res.msg === 'UPDATE_EXPENSE'){
+          this.updateExpense(res)
+        }
+        this.expense = this.sumOfAmount('Amount')
+      }
+    })
   }
 
   sumOfAmount(key:string){
@@ -52,6 +64,22 @@ export class ExpenseComponent implements OnInit {
         width: '800px',
         data: res.json().data
       })
+    })
+  }
+
+  addExpense(data){
+    this.dataSource.data.push(data)
+    this.dataSource.data = this.dataSource.data
+  }
+
+  updateExpense(data : ExpenseData){
+    this.dataSource.data = this.dataSource.data.filter((value,key) =>{
+      if(value._id === data._id){
+        value.Category = data.Category
+        value.Date = data.Date
+        value.Amount = data.Amount
+      }
+      return true
     })
   }
 

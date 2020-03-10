@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { map,startWith } from 'rxjs/operators'
-import { MatTabChangeEvent,MatTab } from '@angular/material'
+import { MatTabChangeEvent,MatDialog } from '@angular/material'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
@@ -43,7 +43,6 @@ export class PopupExpenseBoxComponent implements OnInit {
     private categoryService: CategoryService,
     private expenseIncomeService: ExpenseIncomeService,
     private userService: UserService,
-    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data,
   ) { }
 
@@ -59,6 +58,10 @@ export class PopupExpenseBoxComponent implements OnInit {
     if(this.data != null){
       this.fillValues()
     }
+
+    this.dialogRef.afterClosed().subscribe(result =>{
+      this.expenseIncomeService.dataChange.next(this.expenseIncomeService.getTempData())
+    })
   }
 
   public selectedTab(tabChangeEvent: MatTabChangeEvent): void{
@@ -89,7 +92,7 @@ export class PopupExpenseBoxComponent implements OnInit {
       this.expenseIncomeService.post(expenseForm.value)
     }
     this.closePopUp()
-    this.expenseIncomeService.fireSubmitEvent()
+    // this.expenseIncomeService.fireSubmitEvent()
   }
 
   addNew(){

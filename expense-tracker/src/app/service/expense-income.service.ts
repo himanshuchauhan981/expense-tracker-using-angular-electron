@@ -4,6 +4,7 @@ import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 
 import { environment } from '../../environments/environment'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { BehaviorSubject,Subject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,20 @@ export class ExpenseIncomeService {
 
   baseUrl : string = environment.baseUrl
 
-  @Output() submitEvent: EventEmitter<boolean> = new EventEmitter()
+  tempdata : any
 
-  public _userExpense : ExpenseData[]
+  dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([])
 
-  constructor(private http: Http, @Inject(SESSION_STORAGE) private storage: WebStorageService,private snackBar: MatSnackBar){
-  }
+  constructor(
+    private http: Http,
+    @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    private snackBar: MatSnackBar
+  ){ }
 
   post(expenseValues){
     this.http.post(`${this.baseUrl}/api/expense`,expenseValues)
     .subscribe((res) =>{
+      this.tempdata = res.json().data
       this.snackBar.open(res.json().msg,'Close',{
         duration : 5000
       })
@@ -31,6 +36,7 @@ export class ExpenseIncomeService {
   put(expenseValues,id:string){
     this.http.put(`${this.baseUrl}/api/expense/${id}`,expenseValues)
     .subscribe((res) =>{
+      this.tempdata = res.json().data
       this.snackBar.open(res.json().msg,'Close',{
         duration : 5000
       })
@@ -46,13 +52,13 @@ export class ExpenseIncomeService {
       }
     })
   }
-  
-  fireSubmitEvent(){
-    this.submitEvent.emit(true)
-  }
 
   getExpense(id:string){
     return this.http.get(`${this.baseUrl}/api/expense/${id}`)
+  }
+
+  getTempData(){
+    return this.tempdata
   }
 }
 
@@ -60,5 +66,11 @@ export interface ExpenseData {
   _id: String,
   Date : Date,
   Category: string,
-  Type: string
+  Type: string,
+  Amount: number
+}
+
+export interface submitSubject{
+  updatedExpense: any,
+  updatedMsg : string
 }

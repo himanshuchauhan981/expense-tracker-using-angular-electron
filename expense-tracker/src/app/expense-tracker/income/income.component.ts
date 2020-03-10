@@ -29,8 +29,6 @@ export class IncomeComponent implements OnInit {
   
   constructor(private expenseIncomeService: ExpenseIncomeService, private dialog: MatDialog){ }
 
-  ngOnInit(){ }
-
   ngOnChanges(){
     if(this.incomeData != undefined){
       this.incomeData = this.incomeData.filter(data => data.Type === 'Income')
@@ -41,6 +39,20 @@ export class IncomeComponent implements OnInit {
       
       this.income = this.sumOfAmount('Amount')
     }
+  }
+
+  ngOnInit(){
+    this.expenseIncomeService.dataChange.subscribe((res:any) =>{
+      if(res.length != 0 && res.Type == 'Income'){
+        if(res.msg === 'SAVE_INCOME'){
+          this.addIncome(res)
+        }
+        else if(res.msg === 'UPDATE_INCOME'){
+          this.updateIncome(res)
+        }
+        this.income = this.sumOfAmount('Amount')
+      }
+    })
   }
 
   sumOfAmount(key){
@@ -54,6 +66,22 @@ export class IncomeComponent implements OnInit {
         width: '800px',
         data: res.json().data
       })
+    })
+  }
+
+  addIncome(data){
+    this.dataSource.data.push(data)
+    this.dataSource.data = this.dataSource.data
+  }
+
+  updateIncome(data : ExpenseData){
+    this.dataSource.data = this.dataSource.data.filter((value,key) =>{
+      if(value._id === data._id){
+        value.Category = data.Category
+        value.Date = data.Date
+        value.Amount = data.Amount
+      }
+      return true
     })
   }
 }
