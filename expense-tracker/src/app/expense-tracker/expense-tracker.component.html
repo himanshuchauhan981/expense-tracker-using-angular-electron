@@ -2,10 +2,10 @@
     <expense-tracker-options></expense-tracker-options>
     <div class="row pt-2">
         <div class="col-md-6">
-            <income [incomeData]="userExpense"></income>
+            <income [incomeData]="expenseService.userExpense"></income>
         </div>
         <div class="col-md-6">
-            <expense [expenseData]="userExpense"></expense>
+            <expense [expenseData]="expenseService.userExpense"></expense>
         </div>
     </div>
 </div>

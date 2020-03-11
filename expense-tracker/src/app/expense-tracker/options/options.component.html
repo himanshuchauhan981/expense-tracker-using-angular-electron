@@ -13,25 +13,19 @@
             ></mat-datepicker>
         </mat-form-field>
         <div class="d-flex justify-row-reverse">
-            <button matTooltip = "Create" matTooltipPosition='below' mat-fab color="primary" (click)="openDialogBox()" class="mr-2">+</button>
-            <button mat-fab color="accent" matTooltip = "Update" matTooltipPosition='below'><i class="fa fa-sign-out"></i></button>
+            <button 
+                matTooltip="Create"
+                matTooltipPosition='below'
+                mat-fab color="primary"
+                (click)="openDialogBox()"
+                class="mr-2"
+            >+</button>
+            <button
+                mat-fab
+                color="accent"
+                matTooltip="Update"
+                matTooltipPosition='below'
+            ><i class="fa fa-sign-out"></i></button>
         </div>
     </div>
 </div>
-
-<!-- <form [formGroup]="filterExpenseForm">
-    <mat-form-field>
-        <input 
-            matInput
-            placeholder="Enter Month"
-            aria-label="Enter Month"
-            [matAutocomplete]="auto"
-            formControlName="month"
-        >
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let month of filteredMonths | async" [value]="month">
-                <span>{{ month }}</span>
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form> -->

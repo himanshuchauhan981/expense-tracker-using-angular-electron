@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material';
 
-import { ExpenseIncomeService,ExpenseData } from '../service/expense-income.service'
+import { ExpenseIncomeService, ExpenseData } from '../service/expense-income.service'
+import { OptionsComponent } from './options/options.component';
+import moment from 'moment';
 
 
 @Component({
@@ -12,17 +14,13 @@ import { ExpenseIncomeService,ExpenseData } from '../service/expense-income.serv
 export class ExpenseTrackerComponent implements OnInit {
 
 
-  constructor(private expenseService: ExpenseIncomeService,private dialog: MatDialog) { }
-  
-  userExpense : ExpenseData[]
-  
-  ngOnInit(){
-    this.getUserExpense()
-  }
-  
-  getUserExpense(){
-    this.expenseService.get().subscribe(res =>{
-      this.userExpense = res.json().data
-    })
+  constructor(private expenseService: ExpenseIncomeService) { }
+
+  @ViewChild(OptionsComponent, { static: true }) options: OptionsComponent
+
+
+  ngOnInit() {
+    let date = this.options.date.value
+    this.expenseService.get(date)
   }
 }

@@ -1,11 +1,12 @@
 import { Injectable,Inject } from '@angular/core'
 import { Http } from '@angular/http'
 import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
-
-
 import { environment } from '../../environments/environment'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { BehaviorSubject } from 'rxjs'
+import { MatDialog } from '@angular/material/dialog'
+
+import { PopupExpenseBoxComponent } from '../expense-tracker/popup-expense-box/popup-expense-box.component'
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,13 @@ export class ExpenseIncomeService {
 
   deleteChange: BehaviorSubject<string> = new BehaviorSubject<string>('')
 
+  userExpense : ExpenseData[]
+
   constructor(
     private http: Http,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ){ }
 
   post(expenseValues){
@@ -46,13 +50,19 @@ export class ExpenseIncomeService {
     })
   }
 
-  get(){
+  get(date){
     let userId = this.storage.get('userId');
     
-    return this.http.get(`${this.baseUrl}/api/expense`, {
+    this.http.get(`${this.baseUrl}/api/expense`, {
       params : {
-        userId : userId
+        userId : userId,
+        momentDate : {
+          month: date.format('M'),
+          year: date.format('YYYY')
+        }
       }
+    }).subscribe(res =>{
+      this.userExpense = res.json().data
     })
   }
 
@@ -70,7 +80,13 @@ export class ExpenseIncomeService {
   }
 
   getExpense(id:string){
-    return this.http.get(`${this.baseUrl}/api/expense/${id}`)
+    this.http.get(`${this.baseUrl}/api/expense/${id}`)
+    .subscribe((res) =>{
+      this.dialog.open(PopupExpenseBoxComponent,{
+        width: '800px',
+        data: res.json().data
+      })
+    })
   }
 
   getTempData(){

@@ -1,4 +1,5 @@
 const { category,expense } = require('../models')
+var moment = require('moment')
 
 let expenseIncomeHandler = {
     saveNewExpenseIncome : async (req,res) =>{
@@ -25,7 +26,22 @@ let expenseIncomeHandler = {
     },
 
     getUserExpense : async (req,res) =>{
-        let expenseDetails = await expense.find({UserId : req.query.userId}).sort({Date : -1}).select({ Date: 1, Category: 1, Type: 1, Amount: 1 })
+        let momentDate = JSON.parse(req.query.momentDate)
+
+        let expenseDetails = await expense.find({
+            $and: [
+                {
+                    UserId : req.query.userId
+                },
+                {
+                    Date :{
+                        $gte: moment(`${momentDate.year}/${momentDate.month}`,'YYYY/MM').startOf('month').format('x'),
+                        $lte: moment(`${momentDate.year}/${momentDate.month}`,'YYYY/MM').endOf('month').format('x')
+                    }
+                }
+            ]
+        }).sort({Date : -1}).select({ Date: 1, Category: 1, Type: 1, Amount: 1 })
+        
         res.status(200).json({status: 200, data: expenseDetails})
     },
 

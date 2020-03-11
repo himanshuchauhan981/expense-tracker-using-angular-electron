@@ -6,9 +6,9 @@ import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box
 import {MatDatepicker} from '@angular/material/datepicker';
 
 import * as _moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
-import {default as _rollupMoment, Moment} from 'moment';
 
+import {default as _rollupMoment, Moment} from 'moment';
+import { ExpenseIncomeService } from 'src/app/service/expense-income.service';
 
 const moment = _rollupMoment || _moment;
 
@@ -23,6 +23,7 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
 
 @Component({
   selector: 'expense-tracker-options',
@@ -39,7 +40,7 @@ export const MY_FORMATS = {
 })
 export class OptionsComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,private expenseService: ExpenseIncomeService) { }
 
   filterExpenseForm = new FormGroup({
     month: new FormControl('')
@@ -66,5 +67,8 @@ export class OptionsComponent implements OnInit {
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
     datepicker.close();
+
+    let date = this.date.value
+    this.expenseService.get(date)
   }
 }

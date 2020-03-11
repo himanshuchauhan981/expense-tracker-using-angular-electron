@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource, MatDialog } from '@angular/material'
 
 import { ExpenseData, ExpenseIncomeService } from '../../service/expense-income.service'
-import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component'
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
@@ -66,16 +65,6 @@ export class ExpenseComponent implements OnInit {
 
   sumOfAmount(key:string){
     return this.expenseData.reduce((a,b) => a+ (b[key] || 0), 0)
-  }
-
-  editExpense(id){
-    this.expenseIncomeService.getExpense(id)
-    .subscribe((res) =>{
-      this.dialog.open(PopupExpenseBoxComponent,{
-        width: '800px',
-        data: res.json().data
-      })
-    })
   }
 
   addExpense(data){
