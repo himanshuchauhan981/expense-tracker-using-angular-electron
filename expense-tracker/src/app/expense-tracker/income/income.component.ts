@@ -76,12 +76,6 @@ export class IncomeComponent implements OnInit {
 
   editIncome(id){
     this.expenseIncomeService.getExpense(id)
-    .subscribe((res) =>{
-      this.dialog.open(PopupExpenseBoxComponent,{
-        width: '800px',
-        data: res.json().data
-      })
-    })
   }
 
   addIncome(data){

@@ -10,7 +10,7 @@ const userHandler = {
     loginExistingUsers : async (req,res)=>{
         let status = await users.findOne({"email":req.body.email})
         if(status != null){
-            if(checkHashedPassword(req.body.loginpassword,status.password)){
+            if(checkHashedPassword(req.body.password,status.password)){
                 res.status(200).send({status:200,usersId: status._id})
             }
             else res.status(200).send({status: 401,loginError:'Incorrect Credentials'})

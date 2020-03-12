@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { StorageServiceModule } from 'angular-webstorage-service'
+import { ChartsModule } from 'ng2-charts'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -30,6 +31,8 @@ import { MatNativeDateModule } from '@angular/material';
 import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/popup-expense-box.component';
 import { SignupComponent } from './signup/signup.component';
 import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-dialog.component';
+import { ExpenseChartComponent } from './expense-tracker/expense-chart/expense-chart.component';
+import { IncomeChartComponent } from './expense-tracker/income-chart/income-chart.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-di
     OptionsComponent,
     PopupExpenseBoxComponent,
     SignupComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ExpenseChartComponent,
+    IncomeChartComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-di
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ChartsModule
   ],
   providers: [ ],
   bootstrap: [AppComponent],
