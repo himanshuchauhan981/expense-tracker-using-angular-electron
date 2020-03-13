@@ -35,6 +35,7 @@ export class IncomeComponent implements OnInit {
 
   ngOnChanges(){
     if(this.incomeData != undefined){
+      // console.log(this.incomeData)
       this.incomeData = this.incomeData.filter(data => data.Type === 'Income')
       
       this.dataSource = new MatTableDataSource(this.incomeData)

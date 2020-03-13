@@ -3,6 +3,8 @@ import { ExpenseData } from 'src/app/service/expense-income.service';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 
+import { ExpenseIncomeService } from '../../service/expense-income.service'
+
 @Component({
   selector: 'income-chart',
   templateUrl: './income-chart.component.html',
@@ -26,18 +28,23 @@ export class IncomeChartComponent implements OnInit {
 
   public pieChartPlugins = []
 
-  constructor() { }
+  constructor(private expenseIncomeService: ExpenseIncomeService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngOnChanges(){
+    this.filterIncome()
+    this.expenseIncomeService.dataChange.subscribe((res:any) =>{
+      this.filterIncome()  
+    })
+  }
+
+  filterIncome(){
     if(this.incomeChartData != undefined){
-      this.incomeChartData = this.incomeChartData.filter(data => data.Type != 'Income')
+      this.incomeChartData = this.incomeChartData.filter(data => data.Type != 'Expense')
       this.pieChartLabels = this.incomeChartData.map(data => data.Category)
       
       this.pieChartData = this.incomeChartData.map(data => data.Amount)
-      
     }
   }
 

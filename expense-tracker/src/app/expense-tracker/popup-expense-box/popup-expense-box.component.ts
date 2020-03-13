@@ -117,6 +117,8 @@ export class PopupExpenseBoxComponent implements OnInit {
       this.disableIncomeTab = true
     }
 
+    this.tabHeading = expenseValues.Type
+
     for(let key in expenseValues){
       if(key != 'Type'){
         expenseControls[key].setValue(expenseValues[key])

@@ -3,11 +3,11 @@
     <div class="row pt-2">
         <div class="col-md-6">
             <income [incomeData]="expenseService.userExpense"></income>
-            <expense-chart [expenseChartData]="expenseService.userExpense"></expense-chart>
+            <income-chart [incomeChartData]="expenseService.userExpense"></income-chart>
         </div>
         <div class="col-md-6">
             <expense [expenseData]="expenseService.userExpense"></expense>
-            <income-chart [incomeChartData]="expenseService.userExpense"></income-chart>
+            <expense-chart [expenseChartData]="expenseService.userExpense"></expense-chart>
         </div>
     </div>
 </div>
