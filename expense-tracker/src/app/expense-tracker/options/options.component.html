@@ -23,8 +23,9 @@
             <button
                 mat-fab
                 color="accent"
-                matTooltip="Update"
+                matTooltip="Sign Out"
                 matTooltipPosition='below'
+                (click)="userService.logout()"
             ><i class="fa fa-sign-out"></i></button>
         </div>
     </div>

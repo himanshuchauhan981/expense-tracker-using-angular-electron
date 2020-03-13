@@ -9,6 +9,7 @@ import * as _moment from 'moment';
 
 import {default as _rollupMoment, Moment} from 'moment';
 import { ExpenseIncomeService } from 'src/app/service/expense-income.service';
+import { UserService } from 'src/app/service/user.service';
 
 const moment = _rollupMoment || _moment;
 
@@ -40,7 +41,11 @@ export const MY_FORMATS = {
 })
 export class OptionsComponent implements OnInit {
 
-  constructor(private dialog: MatDialog,private expenseService: ExpenseIncomeService) { }
+  constructor(
+    private dialog: MatDialog,
+    private expenseService: ExpenseIncomeService,
+    private userService: UserService
+  ) { }
 
   filterExpenseForm = new FormGroup({
     month: new FormControl('')

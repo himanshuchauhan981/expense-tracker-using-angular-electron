@@ -25,10 +25,9 @@ export class LoginComponent implements OnInit {
     this.userService.loginExistingUser(loginForm.value)
     .subscribe((res)=>{
       if(res.json().status  === 200){
-        this.userService.storeUserID(res.json().usersId)
+        this.userService.storeUserID(res.json().userId)
         this.router.navigate(['home'])
       }
     })
   }
-
 }
