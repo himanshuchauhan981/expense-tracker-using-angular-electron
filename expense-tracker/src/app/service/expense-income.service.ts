@@ -34,6 +34,7 @@ export class ExpenseIncomeService {
     this.http.post(`${this.baseUrl}/api/expense`,expenseValues)
     .subscribe((res) =>{
       this.userExpense.push(res.json().data)
+      console.log(this.userExpense)
       this.tempdata = res.json().data
       this.snackBar.open(res.json().msg,'Close',{
         duration : 5000
@@ -44,6 +45,15 @@ export class ExpenseIncomeService {
   put(expenseValues,id:string){
     this.http.put(`${this.baseUrl}/api/expense/${id}`,expenseValues)
     .subscribe((res) =>{
+      let data  = res.json().data
+      this.userExpense = this.userExpense.filter((value,key) =>{
+        if(value._id === data._id){
+          value.Category = data.Category
+          value.Date = data.Date
+          value.Amount = data.Amount
+        }
+        return true
+      })
       this.tempdata = res.json().data
       this.snackBar.open(res.json().msg,'Close',{
         duration : 5000

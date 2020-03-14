@@ -33,6 +33,15 @@ export class ExpenseChartComponent implements OnInit {
 
   ngOnChanges(){
     this.filterExpense()
+    this.expenseIncomeService.dataChange.subscribe((res:any) =>{
+      if(res != undefined){
+        if(res.length != 0){
+          this.expenseChartData = this.expenseIncomeService.userExpense
+          this.filterExpense()
+        }
+      }
+    })
+    this.filterExpense()
 
     this.expenseIncomeService.dataChange.subscribe((res:any) =>{
       this.filterExpense()

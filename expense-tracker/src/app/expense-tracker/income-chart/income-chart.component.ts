@@ -35,12 +35,15 @@ export class IncomeChartComponent implements OnInit {
   ngOnChanges(){
     this.filterIncome()
     this.expenseIncomeService.dataChange.subscribe((res:any) =>{
-
-      this.filterIncome()  
+      if(res != undefined){
+        if(res.length != 0){
+          this.incomeChartData = this.expenseIncomeService.userExpense
+          this.filterIncome()
+        }
+      }
     })
 
     this.expenseIncomeService.deleteChange.subscribe((id:any) =>{
-      // this.incomeChartData  = this.incomeChartData.filter(data => data._id != id)
       this.filterIncome()
     })
   }
