@@ -56,6 +56,7 @@ export class ExpenseComponent implements OnInit {
 
     this.expenseIncomeService.deleteChange.subscribe((id:any) =>{
       if(id != ''){
+        this.sumOfAmount('Amount')
         this.dataSource.data = this.dataSource.data.filter((value,key) =>{
           return value._id != id
         })

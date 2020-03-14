@@ -33,6 +33,7 @@ export class ExpenseIncomeService {
   post(expenseValues){
     this.http.post(`${this.baseUrl}/api/expense`,expenseValues)
     .subscribe((res) =>{
+      this.userExpense.push(res.json().data)
       this.tempdata = res.json().data
       this.snackBar.open(res.json().msg,'Close',{
         duration : 5000
@@ -52,7 +53,6 @@ export class ExpenseIncomeService {
 
   get(date){
     let userId = this.storage.get('userId');
-    
     this.http.get(`${this.baseUrl}/api/expense`, {
       params : {
         userId : userId,
@@ -69,6 +69,7 @@ export class ExpenseIncomeService {
   delete(id){
     this.http.delete(`${this.baseUrl}/api/expense/${id}`)
     .subscribe(res =>{
+      this.userExpense = this.userExpense.filter(data => data._id != id)
       let status = res.json().status
       if(status === 200){
         this.deleteChange.next(id)

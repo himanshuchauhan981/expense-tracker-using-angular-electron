@@ -2,11 +2,10 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material'
-import { MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog'
 
 import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { ExpenseData } from '../../service/expense-income.service'
-import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component'
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
@@ -35,7 +34,6 @@ export class IncomeComponent implements OnInit {
 
   ngOnChanges(){
     if(this.incomeData != undefined){
-      // console.log(this.incomeData)
       this.incomeData = this.incomeData.filter(data => data.Type === 'Income')
       
       this.dataSource = new MatTableDataSource(this.incomeData)
@@ -59,11 +57,11 @@ export class IncomeComponent implements OnInit {
           this.income = this.sumOfAmount('Amount')
         }
       }
-      
     })
 
     this.expenseIncomeService.deleteChange.subscribe((id:any) =>{
       if(id != ''){
+        this.sumOfAmount('Amount')
         this.dataSource.data = this.dataSource.data.filter((value,key) =>{
           return value._id != id
         })

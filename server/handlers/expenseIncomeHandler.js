@@ -27,7 +27,6 @@ let expenseIncomeHandler = {
 
     getUserExpense : async (req,res) =>{
         let momentDate = JSON.parse(req.query.momentDate)
-        console.log(req.query.userId)
         let expenseDetails = await expense.find({
             $and: [
                 {

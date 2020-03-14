@@ -17,7 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog'
 import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -72,11 +72,15 @@ import { IncomeChartComponent } from './expense-tracker/income-chart/income-char
     MatTooltipModule,
     ChartsModule
   ],
-  providers: [ ],
+  providers: [{
+    provide : MatDialogRef,
+    useValue : {}
+  }],
   bootstrap: [AppComponent],
   entryComponents: [
+    DeleteDialogComponent,
     PopupExpenseBoxComponent,
-    DeleteDialogComponent
+    
   ]
 })
 export class AppModule { }
