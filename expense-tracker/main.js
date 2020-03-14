@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow,ipcMain } = require('electron')
 const url = require("url");
 const path = require("path");
 
@@ -8,10 +8,17 @@ function createWindow() {
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
+        frame: false,
 		webPreferences: {
-			nodeIntegration: true
-		}
+			nodeIntegration: true,
+			preload: path.join(__dirname, "preload.js"),
+            devTools : false
+		},
+		show: false
 	})
+
+	mainWindow.maximize()
+	mainWindow.show()
 
 	mainWindow.loadURL(
 		url.format({
@@ -25,8 +32,18 @@ function createWindow() {
 
 	mainWindow.on('closed', function () {
 		mainWindow = null
-	})
+    })
 }
+
+ipcMain.on(`display-app-menu`, function(e, args) {
+	if (isWindows && mainWindow) {
+	  menu.popup({
+		window: mainWindow,
+		x: args.x,
+		y: args.y
+	  });
+	}
+  });
 
 app.on('ready', createWindow)
 

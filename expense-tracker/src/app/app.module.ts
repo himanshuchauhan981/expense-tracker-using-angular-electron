@@ -33,6 +33,7 @@ import { SignupComponent } from './signup/signup.component';
 import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-dialog.component';
 import { ExpenseChartComponent } from './expense-tracker/expense-chart/expense-chart.component';
 import { IncomeChartComponent } from './expense-tracker/income-chart/income-chart.component';
+import { ExpenseNavbarComponent } from './expense-navbar/expense-navbar.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { IncomeChartComponent } from './expense-tracker/income-chart/income-char
     SignupComponent,
     DeleteDialogComponent,
     ExpenseChartComponent,
-    IncomeChartComponent
+    IncomeChartComponent,
+    ExpenseNavbarComponent
   ],
   imports: [
     BrowserModule,
