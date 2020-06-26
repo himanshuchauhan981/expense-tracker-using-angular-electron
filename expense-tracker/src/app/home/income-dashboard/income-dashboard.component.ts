@@ -9,11 +9,11 @@ import { ExpenseData } from '../../service/expense-income.service'
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
-  selector: 'income',
-  templateUrl: './income.component.html',
-  styleUrls: ['./income.component.css']
+  selector: 'income-dashboard',
+  templateUrl: './income-dashboard.component.html',
+  styleUrls: ['./income-dashboard.component.css']
 })
-export class IncomeComponent implements OnInit {
+export class IncomeDashboardComponent implements OnInit {
 
   income : number = 0
 

@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs'
 import { MatDialog } from '@angular/material/dialog'
 
 import { environment } from '../../environments/environment'
-import { PopupExpenseBoxComponent } from '../expense-tracker/popup-expense-box/popup-expense-box.component'
+import { PopupExpenseBoxComponent } from '../home/popup-expense-box/popup-expense-box.component'
 
 @Injectable({
   providedIn: 'root'

@@ -7,11 +7,11 @@ import { ExpenseData, ExpenseIncomeService } from '../../service/expense-income.
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 
 @Component({
-  selector: 'expense',
-  templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  selector: 'expense-dashboard',
+  templateUrl: './expense-dashboard.component.html',
+  styleUrls: ['./expense-dashboard.component.css']
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseDashboardComponent implements OnInit {
 
   constructor(private expenseIncomeService: ExpenseIncomeService, private dialog: MatDialog) { }
 

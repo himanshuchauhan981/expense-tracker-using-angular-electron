@@ -23,26 +23,26 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
-import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
-import { ExpenseComponent } from './expense-tracker/expense/expense.component';
-import { IncomeComponent } from './expense-tracker/income/income.component';
-import { OptionsComponent } from './expense-tracker/options/options.component';
+import { HomeComponent } from './home/home.component';
+import { ExpenseDashboardComponent } from './home/expense-dashboard/expense-dashboard.component';
+import { IncomeDashboardComponent } from './home/income-dashboard/income-dashboard.component';
+import { ExpenseTrackerOptionsComponent } from './home/expense-tracker-options/expense-tracker-options.component';
 import { MatNativeDateModule } from '@angular/material';
-import { PopupExpenseBoxComponent } from './expense-tracker/popup-expense-box/popup-expense-box.component';
+import { PopupExpenseBoxComponent } from './home/popup-expense-box/popup-expense-box.component';
 import { SignupComponent } from './signup/signup.component';
-import { DeleteDialogComponent } from './expense-tracker/delete-dialog/delete-dialog.component';
-import { ExpenseChartComponent } from './expense-tracker/expense-chart/expense-chart.component';
-import { IncomeChartComponent } from './expense-tracker/income-chart/income-chart.component';
+import { DeleteDialogComponent } from './home/delete-dialog/delete-dialog.component';
+import { ExpenseChartComponent } from './home/expense-chart/expense-chart.component';
+import { IncomeChartComponent } from './home/income-chart/income-chart.component';
 import { ExpenseNavbarComponent } from './expense-navbar/expense-navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ExpenseTrackerComponent,
-    ExpenseComponent,
-    IncomeComponent,
-    OptionsComponent,
+    HomeComponent,
+    ExpenseDashboardComponent,
+    IncomeDashboardComponent,
+    ExpenseTrackerOptionsComponent,
     PopupExpenseBoxComponent,
     SignupComponent,
     DeleteDialogComponent,

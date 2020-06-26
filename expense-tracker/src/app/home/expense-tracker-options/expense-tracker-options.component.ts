@@ -28,8 +28,8 @@ export const MY_FORMATS = {
 
 @Component({
   selector: 'expense-tracker-options',
-  templateUrl: './options.component.html',
-  styleUrls: ['./options.component.css'],
+  templateUrl: './expense-tracker-options.component.html',
+  styleUrls: ['./expense-tracker-options.component.css'],
   providers: [
     {
       provide: DateAdapter,
@@ -39,7 +39,7 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class OptionsComponent implements OnInit {
+export class ExpenseTrackerOptionsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,

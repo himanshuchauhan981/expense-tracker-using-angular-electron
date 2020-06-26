@@ -2,11 +2,11 @@
     <expense-tracker-options></expense-tracker-options>
     <div class="row pt-2">
         <div class="col-md-6">
-            <income [incomeData]="expenseService.userExpense"></income>
+            <income-dashboard [incomeData]="expenseService.userExpense"></income-dashboard>
             <income-chart [incomeChartData]="expenseService.userExpense"></income-chart>
         </div>
         <div class="col-md-6">
-            <expense [expenseData]="expenseService.userExpense"></expense>
+            <expense-dashboard [expenseData]="expenseService.userExpense"></expense-dashboard>
             <expense-chart [expenseChartData]="expenseService.userExpense"></expense-chart>
         </div>
     </div>
