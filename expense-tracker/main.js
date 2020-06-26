@@ -12,7 +12,7 @@ function createWindow() {
 		webPreferences: {
 			nodeIntegration: true,
 			preload: path.join(__dirname, "preload.js"),
-            devTools : false
+      devTools : false
 		},
 		show: false
 	})
