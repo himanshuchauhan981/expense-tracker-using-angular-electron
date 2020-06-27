@@ -85,7 +85,7 @@ export class ExpenseDashboardComponent implements OnInit {
   }
 
   deleteExpense(id){
-    this.dialog.open(DeleteDialogComponent,{
+    var dialogRef = this.dialog.open(DeleteDialogComponent,{
       width: '300px',
       data: id
     })

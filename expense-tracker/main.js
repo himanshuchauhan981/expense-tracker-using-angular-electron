@@ -1,4 +1,4 @@
-const { app, BrowserWindow,ipcMain } = require('electron')
+const { app, BrowserWindow,ipcMain, Menu } = require('electron')
 const url = require("url");
 const path = require("path");
 
@@ -8,13 +8,14 @@ function createWindow() {
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
-        frame: false,
 		webPreferences: {
+      frame: false,
 			nodeIntegration: true,
 			preload: path.join(__dirname, "preload.js"),
-      devTools : false
+      devTools : true
 		},
-		show: false
+		show: false,
+		frame: false
 	})
 
 	mainWindow.maximize()
@@ -29,6 +30,7 @@ function createWindow() {
 	)
 	
 	mainWindow.webContents.openDevTools()
+	mainWindow.setMenuBarVisibility(false)
 
 	mainWindow.on('closed', function () {
 		mainWindow = null
@@ -43,7 +45,15 @@ ipcMain.on(`display-app-menu`, function(e, args) {
 		y: args.y
 	  });
 	}
-  });
+});
+
+ipcMain.on('close-window', event => {
+	mainWindow.close()
+})
+
+ipcMain.on('minimize-window', event => {
+	mainWindow.minimize()
+})
 
 app.on('ready', createWindow)
 

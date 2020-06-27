@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { StorageServiceModule } from 'angular-webstorage-service'
 import { ChartsModule } from 'ng2-charts'
+import { NgxElectronModule } from 'ngx-electron';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -72,7 +73,8 @@ import { ExpenseNavbarComponent } from './expense-navbar/expense-navbar.componen
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
-    ChartsModule
+    ChartsModule,
+    NgxElectronModule
   ],
   providers: [{
     provide : MatDialogRef,

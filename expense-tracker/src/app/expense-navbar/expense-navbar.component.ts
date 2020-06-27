@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ElectronService } from 'ngx-electron';
 
 
 @Component({
@@ -8,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpenseNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eletronService: ElectronService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  closeApp(){
+    this.eletronService.ipcRenderer.send('close-window')
+  }
+
+  minimizeApp(){
+    this.eletronService.ipcRenderer.send('minimize-window')
   }
 
 }
