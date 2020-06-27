@@ -17,3 +17,20 @@ A windows software which calculates your daily,monthly and yearly expenses and v
 * Electron
 * Node JS
 * ng2-chart
+
+## Screenshots
+* Login
+
+  ![Image of login](https://himanshu-chauhan.000webhostapp.com/login.png)
+
+* Sign Up
+
+  ![Image of Sign Up](https://himanshu-chauhan.000webhostapp.com/signup.png)
+
+* Home
+
+  ![Image of Home](https://himanshu-chauhan.000webhostapp.com/home.png)
+
+  ![Image of Home](https://himanshu-chauhan.000webhostapp.com/new-expense-income.png)
+
+  ![Image of Home](https://himanshu-chauhan.000webhostapp.com/charts.png)
