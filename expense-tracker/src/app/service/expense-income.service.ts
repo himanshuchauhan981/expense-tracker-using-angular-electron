@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs'
 import { MatDialog } from '@angular/material/dialog'
 
 import { environment } from '../../environments/environment'
-import { PopupExpenseBoxComponent } from '../home/popup-expense-box/popup-expense-box.component'
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +32,7 @@ export class ExpenseIncomeService {
   post(expenseValues){
     this.http.post(`${this.baseUrl}/api/expense`,expenseValues)
     .subscribe((res) =>{
-      console.log(res.json().data)
       this.userExpense.push(res.json().data)
-      console.log(this.userExpense)
       this.tempdata = res.json().data
       this.snackBar.open(res.json().msg,'Close',{
         duration : 5000
@@ -92,13 +89,7 @@ export class ExpenseIncomeService {
   }
 
   getExpense(id:string){
-    this.http.get(`${this.baseUrl}/api/expense/${id}`)
-    .subscribe((res) =>{
-      this.dialog.open(PopupExpenseBoxComponent,{
-        width: '800px',
-        data: res.json().data
-      })
-    })
+    return this.http.get(`${this.baseUrl}/api/expense/${id}`)
   }
 
   getTempData(){

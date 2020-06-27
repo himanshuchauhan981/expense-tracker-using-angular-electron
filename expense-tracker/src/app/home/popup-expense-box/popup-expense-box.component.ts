@@ -9,6 +9,7 @@ import { CategoryService, Category } from '../../service/category.service'
 import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { UserService } from '../../service/user.service'
 
+
 @Component({
   selector: 'popup-expense-box',
   templateUrl: './popup-expense-box.component.html',

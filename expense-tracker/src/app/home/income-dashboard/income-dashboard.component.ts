@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ExpenseIncomeService } from '../../service/expense-income.service'
 import { ExpenseData } from '../../service/expense-income.service'
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
+import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component'
 
 @Component({
   selector: 'income-dashboard',
@@ -75,6 +76,12 @@ export class IncomeDashboardComponent implements OnInit {
 
   editIncome(id){
     this.expenseIncomeService.getExpense(id)
+    .subscribe((res) =>{
+      this.dialog.open(PopupExpenseBoxComponent,{
+        width: '800px',
+        data: res.json().data
+      })
+    })
   }
 
   addIncome(data){
