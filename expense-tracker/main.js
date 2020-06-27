@@ -12,7 +12,7 @@ function createWindow() {
       frame: false,
 			nodeIntegration: true,
 			preload: path.join(__dirname, "preload.js"),
-      devTools : true
+      devTools : false
 		},
 		show: false,
 		frame: false
