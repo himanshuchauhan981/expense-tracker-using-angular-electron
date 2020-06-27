@@ -33,6 +33,7 @@ export class ExpenseIncomeService {
   post(expenseValues){
     this.http.post(`${this.baseUrl}/api/expense`,expenseValues)
     .subscribe((res) =>{
+      console.log(res.json().data)
       this.userExpense.push(res.json().data)
       console.log(this.userExpense)
       this.tempdata = res.json().data

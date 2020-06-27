@@ -87,13 +87,18 @@ export class PopupExpenseBoxComponent implements OnInit {
     expenseForm.value.UserId = userId
     expenseForm.value.Type = this.tabHeading
 
-    if(this.data != null){
-      this.expenseIncomeService.put(expenseForm.value,this.data['_id'])
+    if(this.expenseForm.status !='INVALID'){
+      if(this.data != null){
+        this.expenseIncomeService.put(expenseForm.value,this.data['_id'])
+      }
+      else{
+        this.expenseIncomeService.post(expenseForm.value)
+      }
+      this.closePopUp()
     }
     else{
-      this.expenseIncomeService.post(expenseForm.value)
+      this.expenseForm.markAllAsTouched()
     }
-    this.closePopUp()
   }
 
   addNew(){
