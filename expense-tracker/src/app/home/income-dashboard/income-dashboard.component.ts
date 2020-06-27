@@ -101,6 +101,7 @@ export class IncomeDashboardComponent implements OnInit {
   }
 
   deleteIncome(id){
+    console.log(id)
     this.dialog.open(DeleteDialogComponent,{
       width: '300px',
       data: id

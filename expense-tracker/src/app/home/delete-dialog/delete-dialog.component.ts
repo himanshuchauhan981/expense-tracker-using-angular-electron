@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
 
-import { ExpenseIncomeService } from '../../service/expense-income.service'
 
 @Component({
   selector: 'app-delete-dialog',
@@ -12,17 +11,10 @@ export class DeleteDialogComponent implements OnInit {
 
   constructor(
     private dialogRef : MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public id,
-    private expenseIncomeService: ExpenseIncomeService
+    @Inject(MAT_DIALOG_DATA) public id
   ){ }
 
-  ngOnInit(){ 
-    this.expenseIncomeService.deleteChange.subscribe((id:any) =>{
-      if(id != ''){
-        this.dialogRef.close()
-      }
-    })
-  }
+  ngOnInit(){}
 
   closePopUp(){
     this.dialogRef.close()
