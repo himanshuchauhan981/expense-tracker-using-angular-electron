@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import { StorageServiceModule } from 'angular-webstorage-service'
 import { ChartsModule } from 'ng2-charts'
 import { NgxElectronModule } from 'ngx-electron';
 
@@ -28,13 +27,14 @@ import { HomeComponent } from './home/home.component';
 import { ExpenseDashboardComponent } from './home/expense-dashboard/expense-dashboard.component';
 import { IncomeDashboardComponent } from './home/income-dashboard/income-dashboard.component';
 import { ExpenseTrackerOptionsComponent } from './home/expense-tracker-options/expense-tracker-options.component';
-import { MatNativeDateModule } from '@angular/material';
+// import { MatNativeDateModule } from '@angular/material';
 import { PopupExpenseBoxComponent } from './home/popup-expense-box/popup-expense-box.component';
 import { SignupComponent } from './signup/signup.component';
 import { DeleteDialogComponent } from './home/delete-dialog/delete-dialog.component';
 import { ExpenseChartComponent } from './home/expense-chart/expense-chart.component';
 import { IncomeChartComponent } from './home/income-chart/income-chart.component';
 import { ExpenseNavbarComponent } from './expense-navbar/expense-navbar.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { ExpenseNavbarComponent } from './expense-navbar/expense-navbar.componen
     MatTabsModule,
     MatAutocompleteModule,
     MatSelectModule,
-    StorageServiceModule,
+    // NgxWebstorageModule,
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,

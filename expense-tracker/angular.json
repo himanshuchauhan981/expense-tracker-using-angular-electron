@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "expense-tracker"
+  "defaultProject": "expense-tracker",
+  "cli": {
+    "analytics": false
+  }
 }

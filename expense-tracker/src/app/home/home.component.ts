@@ -12,7 +12,7 @@ import { ExpenseTrackerOptionsComponent } from './expense-tracker-options/expens
 export class HomeComponent implements OnInit {
 
 
-  constructor(private expenseService: ExpenseIncomeService) { }
+  constructor(public expenseService: ExpenseIncomeService) { }
 
   @ViewChild(ExpenseTrackerOptionsComponent, { static: true }) options: ExpenseTrackerOptionsComponent
 

@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 import { MatPaginator } from '@angular/material/paginator'
-import { MatTableDataSource, MatDialog } from '@angular/material'
+import { MatTableDataSource } from '@angular/material/table'
 
 import { ExpenseData, ExpenseIncomeService } from '../../service/expense-income.service'
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'expense-dashboard',
@@ -13,7 +14,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 })
 export class ExpenseDashboardComponent implements OnInit {
 
-  constructor(private expenseIncomeService: ExpenseIncomeService, private dialog: MatDialog) { }
+  constructor(public expenseIncomeService: ExpenseIncomeService, private dialog: MatDialog) { }
 
   expense : number  = 0
 

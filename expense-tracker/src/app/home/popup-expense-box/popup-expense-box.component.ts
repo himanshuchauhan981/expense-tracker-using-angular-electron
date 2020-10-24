@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { map,startWith } from 'rxjs/operators'
-import { MatTabChangeEvent } from '@angular/material'
+import { MatTabChangeEvent } from '@angular/material/tabs'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Observable } from 'rxjs';
 

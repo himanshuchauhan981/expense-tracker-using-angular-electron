@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter'
 import { PopupExpenseBoxComponent } from '../popup-expense-box/popup-expense-box.component';
 import {MatDatepicker} from '@angular/material/datepicker';
@@ -10,6 +9,8 @@ import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
 import { ExpenseIncomeService } from 'src/app/service/expense-income.service';
 import { UserService } from 'src/app/service/user.service';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 
 const moment = _rollupMoment || _moment;
 
@@ -44,7 +45,7 @@ export class ExpenseTrackerOptionsComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private expenseService: ExpenseIncomeService,
-    private userService: UserService
+    public userService: UserService
   ) { }
 
   filterExpenseForm = new FormGroup({

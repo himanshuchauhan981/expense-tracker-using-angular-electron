@@ -1,6 +1,6 @@
 import { Injectable,Inject } from '@angular/core'
 import { Http } from '@angular/http'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
+import { SESSION_STORAGE, WebStorageService } from 'ngx-webstorage-service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { BehaviorSubject } from 'rxjs'
 import { MatDialog } from '@angular/material/dialog'
@@ -74,7 +74,7 @@ export class ExpenseIncomeService {
     })
   }
 
-  delete(id){
+  delete(id:string){
     this.http.delete(`${this.baseUrl}/api/expense/${id}`)
     .subscribe(res =>{
       this.userExpense = this.userExpense.filter(data => data._id != id)

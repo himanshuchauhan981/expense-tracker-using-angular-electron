@@ -11,19 +11,19 @@ import { ExpenseIncomeService } from '../../service/expense-income.service'
 export class DeleteDialogComponent implements OnInit {
 
   constructor(
-    private dialogRef : MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public id,
+    // private dialogRef : MatDialogRef<DeleteDialogComponent>,
+    // @Inject(MAT_DIALOG_DATA) public id,
     private expenseIncomeService: ExpenseIncomeService
   ){ }
 
   ngOnInit(){}
 
   closePopUp(){
-    this.dialogRef.close()
+    // this.dialogRef.close()
   }
 
   delete(id: String){
-    this.expenseIncomeService.delete(id)
+    // this.expenseIncomeService.delete(id)
     this.closePopUp()
   }
 }

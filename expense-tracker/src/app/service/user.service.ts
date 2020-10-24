@@ -1,7 +1,7 @@
 import { Injectable,Inject } from '@angular/core';
 import { Http } from '@angular/http'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service'
 import { Router } from '@angular/router'
+import {SESSION_STORAGE,WebStorageService} from 'ngx-webstorage-service';
 
 import { environment } from '../../environments/environment'
 
@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment'
 })
 export class UserService {
 
-  baseUrl : string = environment.baseUrl
+  baseUrl : string = environment.baseUrl;
 
   constructor(
     private http: Http,
